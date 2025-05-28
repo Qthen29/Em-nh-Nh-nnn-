@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gửi chị yêu 💖</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: linear-gradient(to top, #ffd6e0, #fff5f8);
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      transform: rotate(45deg);
+      animation: fly 4s linear forwards;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      top: 0;
+      left: -10px;
+    }
+
+    @keyframes fly {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(45deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-100vh) scale(1.5) rotate(45deg);
+      }
+    }
+
+    .message {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #d63384;
+      animation: fadeInOut 6s infinite;
+    }
+
+    @keyframes fadeInOut {
+      0%, 100% { opacity: 0; }
+      10%, 90% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="message" id="message">Mạnh mẽ lên người đẹp 😘</div>
+
+<script>
+  const messages = [
+    "Mạnh mẽ lên người đẹp 😘",
+    "Em nhớ chịiii nhìuuu lắm á 🥹",
+    "Chị là người tuyệt vời nhất 🌈",
+    "Yêu chị nhìuuu lắm luôn á 💕"
+  ];
+
+  function createHeart(x = Math.random() * window.innerWidth, y = window.innerHeight) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.style.left = `${x - 10}px`;
+    heart.style.top = `${y - 10}px`;
+    heart.style.width = `${10 + Math.random() * 30}px`;
+    heart.style.height = heart.style.width;
+    heart.style.backgroundColor = `hsl(${Math.random() * 360}, 80%, 70%)`;
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 4000);
+  }
+
+  setInterval(() => {
+    for (let i = 0; i < 5; i++) {
+      createHeart();
+    }
+  }, 300);
+
+  document.body.addEventListener("click", (e) => {
+    for (let i = 0; i < 10; i++) {
+      createHeart(e.clientX + (Math.random() - 0.5) * 50, e.clientY + (Math.random() - 0.5) * 50);
+    }
+  });
+
+  // Đổi thông điệp theo thời gian
+  let msgIndex = 0;
+  setInterval(() => {
+    msgIndex = (msgIndex + 1) % messages.length;
+    document.getElementById("message").innerText = messages[msgIndex];
+  }, 6000);
+</script>
+
+</body>
+</html>
